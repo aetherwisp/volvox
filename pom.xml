@@ -71,7 +71,8 @@
         <spotbugs.version>4.2.0</spotbugs.version>
         <spotbugs.outputXmlFilename>${project.artifactId}-spotbugsXml.xml</spotbugs.outputXmlFilename>
 
-        <volvox.vaadin.version>18.0.6</volvox.vaadin.version>
+        <!-- Vaadin 14 latest LTS -->
+        <volvox.vaadin.version>14.4.8</volvox.vaadin.version>
     </properties>
 
 
