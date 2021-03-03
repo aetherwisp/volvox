@@ -1,0 +1,174 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <!-- ========================= -->
+    <!-- BASIC PROJECT INFORMATION -->
+    <!-- ========================= -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.0</version>
+    </parent>
+    <groupId>com.github.aetherwisp</groupId>
+    <artifactId>volvox</artifactId>
+    <version>0.1.0</version>
+    <packaging>pom</packaging>
+
+
+    <!-- =============== -->
+    <!-- MODULES SECTION -->
+    <!-- =============== -->
+    <modules>
+        <module>app/application</module>
+        <module>app/domain</module>
+        <module>app/infrastructure</module>
+        <module>app</module>
+    </modules>
+
+
+    <!-- ==================== -->
+    <!-- REPOSITORIES SECTION -->
+    <!-- ==================== -->
+    <repositories>
+        <!-- Main Maven repository -->
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- Repository used by many Vaadin add-ons -->
+        <repository>
+            <id>Vaadin Directory</id>
+            <url>https://maven.vaadin.com/vaadin-addons</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <!-- Main Maven repository -->
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <!-- ================== -->
+    <!-- PROPERTIES SECTION -->
+    <!-- ================== -->
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <spotbugs.version>4.2.0</spotbugs.version>
+        <spotbugs.outputXmlFilename>${project.artifactId}-spotbugsXml.xml</spotbugs.outputXmlFilename>
+
+        <volvox.vaadin.version>18.0.6</volvox.vaadin.version>
+    </properties>
+
+
+    <!-- ============================= -->
+    <!-- DEPENDENCY MANAGEMENT SECTION -->
+    <!-- ============================= -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- ====== -->
+            <!-- Vaadin -->
+            <!-- ====== -->
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${volvox.vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- ============== -->
+            <!-- Apache Commons -->
+            <!-- ============== -->
+            <dependency>
+                <groupId>commons-cli</groupId>
+                <artifactId>commons-cli</artifactId>
+                <version>1.4</version>
+            </dependency>
+
+            <!-- ============== -->
+            <!-- Test Libraries -->
+            <!-- ============== -->
+            <dependency>
+                <groupId>com.ninja-squad</groupId>
+                <artifactId>DbSetup</artifactId>
+                <version>2.1.0</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- ================ -->
+            <!-- Service Provider -->
+            <!-- ================ -->
+            <dependency>
+                <groupId>org.kohsuke.metainf-services</groupId>
+                <artifactId>metainf-services</artifactId>
+                <version>1.8</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs -->
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs</artifactId>
+                <version>${spotbugs.version}</version>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.github.spotbugs</groupId>
+                            <artifactId>spotbugs</artifactId>
+                            <version>4.2.0</version>
+                            <type>pom</type>
+                        </dependency>
+                    </dependencies>
+                    <configuration><!-- https://spotbugs.github.io/spotbugs-maven-plugin/check-mojo.html -->
+                        <effort>Max</effort>
+                        <threshold>Low</threshold>
+                        <failOnError>false</failOnError>
+                        <jvmArgs>
+                            -Duser.language=ja
+                            -Duser.country=JP
+                            -Duser.timezone=Asia/Tokyo
+                        </jvmArgs>
+                        <sourceEncoding>UTF-8</sourceEncoding>
+                        <outputEncoding>UTF-8</outputEncoding>
+                        <spotbugsXmlOutputDirectory>${project.build.directory}/../../../target/spotbugs</spotbugsXmlOutputDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>test-compile</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

@@ -1,0 +1,29 @@
+# ----------------------------------------
+# Project specific properties
+# ----------------------------------------
+aetherwisp:
+  volvox:
+    presentation:
+      lib:
+        axios:
+          version: 0.21.0
+    application:
+      browser-startup: true
+
+# ----------------------------------------
+# Common Application properties
+# ----------------------------------------
+server:
+  compression:
+    enabled: true
+  servlet:
+    context-path: /volvox
+spring:
+  mvc:
+    favicon:
+      enabled: true
+  profiles:
+    active: prd
+  resources:
+    chain:
+      compressed: true

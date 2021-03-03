@@ -1,0 +1,44 @@
+# ----------------------------------------
+# Project specific properties
+# ----------------------------------------
+aetherwisp:
+  volvox:
+    application:
+      version: 1.0.0
+
+# ----------------------------------------
+# Common Application properties
+# ----------------------------------------
+logging:
+   config: classpath:log4j2-test.xml
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:volvox;MODE=PostgreSQL;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
+    username: sa
+    password: password
+    hikari:
+      auto-commit: false
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      maximum-pool-size: 10
+      register-mbeans: false
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  jdbc:
+    template:
+      fetch-size: 1000
+  resources:
+    cache:
+      cachecontrol:
+        cache-private: true
+        must-revalidate: true
+        no-store: true
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/
+

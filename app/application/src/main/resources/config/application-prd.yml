@@ -1,0 +1,22 @@
+# ----------------------------------------
+# Project specific properties
+# ----------------------------------------
+aetherwisp:
+  volvox:
+    application:
+      version: ${project.version}+${build.number}
+
+# ----------------------------------------
+# Common Application properties
+# ----------------------------------------
+logging:
+   config: classpath:log4j2-prd.xml
+server:
+   port: 0
+spring:
+  main:
+    banner-mode: off
+  resources:
+    cache:
+      cachecontrol:
+        max-age: 31536000

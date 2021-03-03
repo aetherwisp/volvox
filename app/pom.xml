@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <!-- ========================= -->
+    <!-- BASIC PROJECT INFORMATION -->
+    <!-- ========================= -->
+    <parent>
+        <groupId>com.github.aetherwisp</groupId>
+        <artifactId>volvox</artifactId>
+        <version>0.1.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>volvox-reporting</artifactId>
+
+
+    <!-- ==================== -->
+    <!-- DEPENDENCIES SECTION -->
+    <!-- ==================== -->
+    <dependencies>
+        <dependency>
+            <groupId>com.github.aetherwisp</groupId>
+            <artifactId>volvox-application</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- ================= -->
+            <!-- SpotBugs Ant task -->
+            <!-- ================= -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>union-bugs</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <property name="spotbugs.home" value="${project.basedir}/../dev/maven/plugins/spotbugs/${spotbugs.version}" />
+                                <property name="spotbugs.output" value="${project.build.directory}/spotbugs" />
+
+                                <taskdef name="unionbugs" classname="edu.umd.cs.findbugs.anttask.UnionBugs2" classpath="${spotbugs.home}/lib/spotbugs-ant.jar" />
+                                <unionbugs home="${spotbugs.home}" to="${spotbugs.output}/unionbugsXml.xml" debug="true">
+                                    <fileset dir="${spotbugs.output}">
+                                        <include name="volvox-*-spotbugsXml.xml" />
+                                    </fileset>
+                                </unionbugs>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

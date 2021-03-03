@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+
+<Configuration name="volvox" status="warn">
+
+    <!-- ================== -->
+    <!-- PROPERTIES SECTION -->
+    <!-- ================== -->
+    <Properties>
+        <Property name="logging.pattern">%d{DEFAULT} %5p [%t] (%c) - %m%n</Property>
+        <Property name="logging.root">$${sys:com.github.aetherwisp.volvox.logging.root:-$${sys:java.io.tmpdir}}</Property>
+        <Property name="logging.name">$${sys:com.github.aetherwisp.volvox.logging.name:-volvox}</Property>
+    </Properties>
+
+    <!-- ================= -->
+    <!-- APPENDERS SECTION -->
+    <!-- ================= -->
+    <Appenders>
+        <RollingFile name="FILE"
+                     append="true"
+                     fileName="${logging.root}/${logging.name}.log"
+                     filePattern="${logging.root}/${logging.name}_%d{yyyyMMdd}.log.gz">
+            <PatternLayout pattern="${logging.pattern}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${logging.root}">
+                    <IfFileName glob="${logging.name}*.log.gz" />
+                    <IfAccumulatedFileCount exceeds="90" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <!-- =============== -->
+    <!-- LOGGERS SECTION -->
+    <!-- =============== -->
+    <Loggers>
+        <Logger name="com.github.aetherwisp.volvox" level="INFO" additivity="false">
+            <AppenderRef ref="FILE" />
+        </Logger>
+
+        <!-- Root -->
+        <Root level="INFO">
+            <AppenderRef ref="FILE" />
+        </Root>
+    </Loggers>
+</Configuration>

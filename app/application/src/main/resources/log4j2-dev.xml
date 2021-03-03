@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+
+<Configuration name="volvox" status="info">
+
+    <!-- ================== -->
+    <!-- PROPERTIES SECTION -->
+    <!-- ================== -->
+    <Properties>
+        <Property name="logging.pattern">%d{DEFAULT} %5p [%t] (%C:%L) - %m%n</Property>
+    </Properties>
+
+    <!-- ================= -->
+    <!-- APPENDERS SECTION -->
+    <!-- ================= -->
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logging.pattern}" />
+        </Console>
+    </Appenders>
+
+    <!-- =============== -->
+    <!-- LOGGERS SECTION -->
+    <!-- =============== -->
+    <Loggers>
+        <Logger name="com.github.aetherwisp.volvox" level="DEBUG" additivity="false">
+            <AppenderRef ref="STDOUT" />
+        </Logger>
+
+        <!-- Sping Boot -->
+        <Logger name="org.springframework" level="DEBUG" additivity="false">
+            <AppenderRef ref="STDOUT" />
+        </Logger>
+
+        <!-- Root -->
+        <Root level="INFO">
+            <AppenderRef ref="STDOUT" />
+        </Root>
+    </Loggers>
+</Configuration>
