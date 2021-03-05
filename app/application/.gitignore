@@ -5,10 +5,9 @@
 /node/
 /target
 /node_modules/
-/package.json
+/package*.json
 /pnpm-lock.yaml
 /pnpmfile.js
 /tsconfig.json
 /types.d.ts
-/webpack.config.js
-/webpack.generated.js
+/webpack.*.js

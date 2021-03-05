@@ -72,6 +72,9 @@
         <spotbugs.outputXmlFilename>${project.artifactId}-spotbugsXml.xml</spotbugs.outputXmlFilename>
 
         <!-- Vaadin 14 latest LTS -->
+<!--
+        <volvox.vaadin.version>18.0.6</volvox.vaadin.version>
+-->
         <volvox.vaadin.version>14.4.8</volvox.vaadin.version>
     </properties>
 
@@ -157,11 +160,11 @@
                         </jvmArgs>
                         <sourceEncoding>UTF-8</sourceEncoding>
                         <outputEncoding>UTF-8</outputEncoding>
-                        <spotbugsXmlOutputDirectory>${project.build.directory}/../../../target/spotbugs</spotbugsXmlOutputDirectory>
+                        <spotbugsXmlOutputDirectory>${project.basedir}/../target/spotbugs</spotbugsXmlOutputDirectory>
                     </configuration>
                     <executions>
                         <execution>
-                            <phase>test-compile</phase>
+                            <phase>process-classes</phase>
                             <goals>
                                 <goal>check</goal>
                             </goals>

@@ -22,8 +22,12 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Profile(DEV)
 public class RequestLoggingFilter implements Filter {
+    //======================================================================
+    // Fields
     private static final Logger logger = getLogger(lookup().lookupClass());
 
+    //======================================================================
+    // Methods
     @Override
     public void doFilter(ServletRequest _request, ServletResponse _response, FilterChain _chain) throws IOException, ServletException {
 

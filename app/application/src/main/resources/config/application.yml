@@ -4,6 +4,7 @@
 aetherwisp:
   volvox:
     presentation:
+      title: Volvox Platform
       lib:
         axios:
           version: 0.21.0

@@ -37,7 +37,7 @@
                 <executions>
                     <execution>
                         <id>union-bugs</id>
-                        <phase>compile</phase>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
@@ -46,6 +46,7 @@
                                 <property name="spotbugs.home" value="${project.basedir}/../dev/maven/plugins/spotbugs/${spotbugs.version}" />
                                 <property name="spotbugs.output" value="${project.build.directory}/spotbugs" />
 
+                                <mkdir dir="${spotbugs.output}" />
                                 <taskdef name="unionbugs" classname="edu.umd.cs.findbugs.anttask.UnionBugs2" classpath="${spotbugs.home}/lib/spotbugs-ant.jar" />
                                 <unionbugs home="${spotbugs.home}" to="${spotbugs.output}/unionbugsXml.xml" debug="true">
                                     <fileset dir="${spotbugs.output}">
