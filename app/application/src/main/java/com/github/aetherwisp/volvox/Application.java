@@ -3,12 +3,14 @@ package com.github.aetherwisp.volvox;
 import java.io.IOException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
-@SpringBootApplication
-public class Application {
+@SpringBootApplication(exclude = ErrorMvcAutoConfiguration.class)
+public class Application extends SpringBootServletInitializer {
     static {
         System.setProperty("java.awt.headless", "false");
     }
