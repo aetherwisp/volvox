@@ -22,7 +22,7 @@ server:
 spring:
   mvc:
     favicon:
-      enabled: true
+      enabled: false
   profiles:
     active: prd
   resources:

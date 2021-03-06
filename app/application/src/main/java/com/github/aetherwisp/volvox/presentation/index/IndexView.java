@@ -2,10 +2,12 @@ package com.github.aetherwisp.volvox.presentation.index;
 
 import static java.lang.invoke.MethodHandles.lookup;
 import static org.apache.logging.log4j.LogManager.getLogger;
+import java.util.Objects;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import com.github.aetherwisp.volvox.presentation.PresentationConfiguration;
+import com.github.aetherwisp.volvox.presentation.VolvoxPageConfigurator;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -15,7 +17,7 @@ import com.vaadin.flow.router.HasDynamicTitle;
 import com.vaadin.flow.router.Route;
 
 @Route("")
-public class IndexView extends VerticalLayout implements HasDynamicTitle, BeforeEnterObserver {
+public class IndexView extends VerticalLayout implements HasDynamicTitle, BeforeEnterObserver, VolvoxPageConfigurator {
     private static final long serialVersionUID = 1L;
 
     //======================================================================
@@ -30,7 +32,7 @@ public class IndexView extends VerticalLayout implements HasDynamicTitle, Before
     // Constructors
     @Autowired
     public IndexView(@Value("${" + PresentationConfiguration.PREFIX + ".title}") final String _title) {
-        this.title = _title;
+        this.title = Objects.requireNonNull(_title);
 
         this.addClassName("login-view");
         this.setSizeFull();
